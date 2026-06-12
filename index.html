@@ -277,6 +277,18 @@
     .flow-link{display:none}
     .foot-grid{grid-template-columns:1fr;gap:32px}
   }
+
+  /* Contact Form Styles */
+  .contact-form{position:relative;z-index:5;max-width:500px;margin:34px auto 0;text-align:left;display:flex;flex-direction:column;gap:16px}
+  .contact-form .form-group{display:flex;flex-direction:column;gap:6px}
+  .contact-form label{font-size:13.5px;font-weight:600;color:#9fb0cf;letter-spacing:.02em}
+  .contact-form input, .contact-form textarea{width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#fff;font-family:inherit;font-size:14.5px;outline:none;transition:all .2s}
+  .contact-form input:focus, .contact-form textarea:focus{border-color:#fff;background:rgba(255,255,255,.1)}
+  .contact-form .row-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:500px){
+    .contact-form .row-grid{grid-template-columns:1fr}
+  }
+
   @media (prefers-reduced-motion:reduce){
     .tile{animation:none}
     .reveal{transition:none;opacity:1;transform:none}
@@ -447,10 +459,26 @@
       <div class="glow"></div>
       <h2>Ready to build your next software product?</h2>
       <p>Tell us about your project. We'll come back within one business day with a clear scope and estimate.</p>
-      <div class="row">
-        <a href="#contact" class="btn btn-white">Talk to an Expert</a>
-        <a href="#contact" class="btn btn-outline-w">Get a Proposal <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
+      <form id="contactForm" class="contact-form">
+        <div class="row-grid">
+          <div class="form-group">
+            <label for="clientName">Your Name</label>
+            <input type="text" id="clientName" name="name" required placeholder="John Doe" />
+          </div>
+          <div class="form-group">
+            <label for="clientPhone">Mobile Number</label>
+            <input type="tel" id="clientPhone" name="phone" required placeholder="+91 80196 95758" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="clientMessage">Project Details (Optional)</label>
+          <textarea id="clientMessage" name="message" rows="3" placeholder="Tell us briefly about your project..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-white" style="justify-content:center; width:100%; margin-top:8px;">
+          Send Inquiry
+        </button>
+        <div id="formStatus" style="font-size:14.5px; font-weight:600; text-align:center; margin-top:8px; display:none;"></div>
+      </form>
     </div>
   </div>
 </section>
@@ -667,6 +695,48 @@ function countUp(el){
   setTimeout(()=>{ if(!('IntersectionObserver' in window) || !ioFired) harden(); }, 800);
   setTimeout(()=>{ if(revealEls.some(el=>el.classList.contains('in') && parseFloat(getComputedStyle(el).opacity)===0)) harden(); }, 1600);
 })();
+
+/* ---------- contact form submission ---------- */
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const status = document.getElementById('formStatus');
+    const btn = form.querySelector('button[type="submit"]');
+    
+    status.style.display = 'block';
+    status.style.color = '#9fb0cf';
+    status.textContent = 'Sending your request...';
+    btn.disabled = true;
+
+    try {
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      
+      const result = await res.json();
+      if (res.ok) {
+        status.style.color = '#34D399'; // Green-400
+        status.textContent = 'Thank you! We will get back to you shortly.';
+        form.reset();
+      } else {
+        status.style.color = '#F87171'; // Red-400
+        status.textContent = result.error || 'Failed to send. Please try again.';
+      }
+    } catch (err) {
+      status.style.color = '#F87171'; // Red-400
+      status.textContent = 'Network error. Please try again or email us directly.';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+}
 </script>
 </body>
 </html>

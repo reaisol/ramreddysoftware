@@ -207,8 +207,13 @@
       <span class="mark">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%" style="display: block;">
           <rect width="100%" height="100%" fill="#ffffff"/>
-          <path d="M 10 80 L 42.43 20 L 56.49 46 L 64.05 32 L 90 80" fill="none" stroke="#0B1220" stroke-width="6" stroke-linecap="round" stroke-linejoin="miter"/>
-          <path d="M 24.05 80 L 42.43 46 L 56.49 72 L 64.05 58 L 75.94 80" fill="none" stroke="#0B1220" stroke-width="6" stroke-linecap="round" stroke-linejoin="miter"/>
+          <g clip-path="url(#bottom-clip)">
+            <clipPath id="bottom-clip">
+              <rect x="0" y="0" width="100" height="80"/>
+            </clipPath>
+            <path d="M 10 80 L 42.43 20 L 56.49 46 L 64.05 32 L 90 80" fill="none" stroke="#0B1220" stroke-width="8" stroke-linecap="butt" stroke-linejoin="miter"/>
+            <path d="M 24.05 80 L 42.43 46 L 56.49 72" fill="none" stroke="#0B1220" stroke-width="8" stroke-linecap="butt" stroke-linejoin="miter"/>
+          </g>
         </svg>
       </span>
       <span>Wockridge<small>IT Solutions Pvt Ltd</small></span>
@@ -286,8 +291,13 @@
           <span class="mark">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%" style="display: block;">
               <rect width="100%" height="100%" fill="#ffffff"/>
-              <path d="M 10 80 L 42.43 20 L 56.49 46 L 64.05 32 L 90 80" fill="none" stroke="#0B1220" stroke-width="6" stroke-linecap="round" stroke-linejoin="miter"/>
-              <path d="M 24.05 80 L 42.43 46 L 56.49 72 L 64.05 58 L 75.94 80" fill="none" stroke="#0B1220" stroke-width="6" stroke-linecap="round" stroke-linejoin="miter"/>
+              <g clip-path="url(#bottom-clip-foot)">
+                <clipPath id="bottom-clip-foot">
+                  <rect x="0" y="0" width="100" height="80"/>
+                </clipPath>
+                <path d="M 10 80 L 42.43 20 L 56.49 46 L 64.05 32 L 90 80" fill="none" stroke="#0B1220" stroke-width="8" stroke-linecap="butt" stroke-linejoin="miter"/>
+                <path d="M 24.05 80 L 42.43 46 L 56.49 72" fill="none" stroke="#0B1220" stroke-width="8" stroke-linecap="butt" stroke-linejoin="miter"/>
+              </g>
             </svg>
           </span>
           <span>Wockridge<small>IT Solutions Pvt Ltd</small></span>

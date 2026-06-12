@@ -14,7 +14,7 @@ export async function onRequestPost(context) {
     // Use Resend to send the email notification
     // If FROM_EMAIL is not configured, we default to onboarding@resend.dev (Resend's default testing address)
     const fromEmail = env.FROM_EMAIL || 'onboarding@resend.dev';
-    const toEmail = env.TO_EMAIL || 'contact@wockridge.com';
+    const toEmail = env.TO_EMAIL || 'wockridgeitsolutions@gmail.com';
     const apiKey = env.RESEND_API_KEY;
 
     if (!apiKey) {

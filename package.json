@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Wockridge IT Solutions website",
   "scripts": {
-    "dev": "wrangler dev --persist-to ../wrangler-state-wockridge"
+    "dev": "wrangler dev"
   },
   "devDependencies": {
     "wrangler": "^3.0.0"

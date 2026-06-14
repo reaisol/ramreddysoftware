@@ -31,7 +31,7 @@ export async function onRequestPost(context) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: `Workridge Website <${fromEmail}>`,
+        from: `Wockridge Website <${fromEmail}>`,
         to: toEmail,
         subject: `New Lead: ${name}`,
         html: `
@@ -44,7 +44,7 @@ export async function onRequestPost(context) {
               ${message ? message.replace(/\n/g, '<br>') : 'No details provided.'}
             </blockquote>
             <hr style="border: 0; border-top: 1px solid #E5EAF1; margin: 20px 0;" />
-            <small style="color: #64748B;">Submitted from the Workridge IT Solutions website contact form.</small>
+            <small style="color: #64748B;">Submitted from the Wockridge IT Solutions website contact form.</small>
           </div>
         `
       })
